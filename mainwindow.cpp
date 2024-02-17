@@ -2,11 +2,42 @@
 #include "ui_mainwindow.h"
 #include <QPainter>
 
+class Flag : public QWidget
+{
+public:
+    Flag(QWidget *parent = nullptr) : QWidget(parent)
+    {
+        setFixedSize(100, 100);
+    }
+
+protected:
+    void paintEvent(QPaintEvent *) override
+    {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+
+        int flagWidth = width();
+        int flagHeight = flagWidth / 3;
+        QRect flagRect(0, 0, flagWidth, flagHeight);
+
+        painter.fillRect(flagRect, Qt::white);
+
+        flagRect.translate(0, flagHeight);
+        painter.fillRect(flagRect, QColorConstants::Svg::dodgerblue);
+
+        flagRect.translate(0, flagHeight);
+        painter.fillRect(flagRect, Qt::red);
+    }
+};
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    Flag *flag = new Flag(this);
+    flag->move(445, 220);
 }
 
 MainWindow::~MainWindow()
@@ -16,8 +47,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-    QPainter painter;
-    painter.begin(this);
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setBrush(QBrush(QColorConstants::Svg::turquoise, Qt::SolidPattern));
+    painter.drawRect(this->rect());
 
     QRectF rectangle(250.0, 220.0, 380.0, 200.0);
     int startAngle = 180 * 16;
