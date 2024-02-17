@@ -1,34 +1,30 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QPainter>
+#include <QPropertyAnimation>
 
-class Flag : public QWidget
+Flag::Flag(QWidget *parent) : QWidget(parent)
 {
-public:
-    Flag(QWidget *parent = nullptr) : QWidget(parent)
-    {
-        setFixedSize(100, 100);
-    }
+    setFixedSize(100, 100);
+}
 
-protected:
-    void paintEvent(QPaintEvent *) override
-    {
-        QPainter painter(this);
-        painter.setRenderHint(QPainter::Antialiasing);
+void Flag::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
 
-        int flagWidth = width();
-        int flagHeight = flagWidth / 3;
-        QRect flagRect(0, 0, flagWidth, flagHeight);
+    int flagWidth = width();
+    int flagHeight = flagWidth / 3;
+    QRect flagRect(0, 0, flagWidth, flagHeight);
 
-        painter.fillRect(flagRect, Qt::white);
+    painter.fillRect(flagRect, Qt::white);
 
-        flagRect.translate(0, flagHeight);
-        painter.fillRect(flagRect, QColorConstants::Svg::dodgerblue);
+    flagRect.translate(0, flagHeight);
+    painter.fillRect(flagRect, QColorConstants::Svg::dodgerblue);
 
-        flagRect.translate(0, flagHeight);
-        painter.fillRect(flagRect, Qt::red);
-    }
-};
+    flagRect.translate(0, flagHeight);
+    painter.fillRect(flagRect, Qt::red);
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -36,9 +32,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    Flag *flag = new Flag(this);
+    flag = new Flag(this);
     flag->move(445, 220);
 }
+
+
 
 MainWindow::~MainWindow()
 {
@@ -64,4 +62,13 @@ void MainWindow::paintEvent(QPaintEvent *)
     painter.drawLine(440, 315, 440, 120);
 
     painter.end();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    QPropertyAnimation *animation = new QPropertyAnimation(flag, "pos");
+    animation->setDuration(1000);
+    animation->setStartValue(flag->pos());
+    animation->setEndValue(QPoint(flag->x(), flag->y() - 100));
+    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
