@@ -30,6 +30,7 @@ public:
 private:
     Ui::MainWindow *ui;
     Flag *flag;
+    bool isFlagUp;
 
 protected:
     void paintEvent(QPaintEvent*) override;

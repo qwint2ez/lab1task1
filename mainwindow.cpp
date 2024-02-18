@@ -26,6 +26,7 @@ void Flag::paintEvent(QPaintEvent *)
     painter.fillRect(flagRect, Qt::red);
 }
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -34,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     flag = new Flag(this);
     flag->move(445, 220);
+    isFlagUp = false;
 }
 
 
@@ -69,6 +71,12 @@ void MainWindow::on_pushButton_clicked()
     QPropertyAnimation *animation = new QPropertyAnimation(flag, "pos");
     animation->setDuration(1000);
     animation->setStartValue(flag->pos());
-    animation->setEndValue(QPoint(flag->x(), flag->y() - 100));
+    if (!isFlagUp) {
+        animation->setEndValue(QPoint(flag->x(), flag->y() - 100));
+        isFlagUp = true;
+    } else {
+        animation->setEndValue(QPoint(flag->x(), flag->y() + 100));
+        isFlagUp = false;
+    }
     animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
