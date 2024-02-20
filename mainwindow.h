@@ -3,21 +3,13 @@
 
 #include <QMainWindow>
 #include <QWidget>
+#include "flag.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-
-class Flag : public QWidget
-{
-    Q_OBJECT
-public:
-    Flag(QWidget *parent = nullptr);
-protected:
-    void paintEvent(QPaintEvent *) override;
-};
 
 class MainWindow : public QMainWindow
 {
