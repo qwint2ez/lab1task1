@@ -12,6 +12,9 @@ MainWindow::MainWindow(QWidget *parent)
     flag = new Flag(this);
     flag->move(445, 220);
     isFlagUp = false;
+
+    flagUpPosition = QPoint(flag->x(), 120);
+    flagDownPosition = QPoint(flag->x(), 220);
 }
 
 MainWindow::~MainWindow()
@@ -46,10 +49,10 @@ void MainWindow::on_pushButton_clicked()
     animation->setDuration(1000);
     animation->setStartValue(flag->pos());
     if (!isFlagUp) {
-        animation->setEndValue(QPoint(flag->x(), flag->y() - 100));
+        animation->setEndValue(flagUpPosition);
         isFlagUp = true;
     } else {
-        animation->setEndValue(QPoint(flag->x(), flag->y() + 100));
+        animation->setEndValue(flagDownPosition);
         isFlagUp = false;
     }
     animation->start(QAbstractAnimation::DeleteWhenStopped);

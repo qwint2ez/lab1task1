@@ -2,7 +2,7 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 
-Flag::Flag(QWidget *parent) : QWidget(parent)
+Flag::Flag(QWidget *parent) : MovingRectangle(parent)
 {
     setFixedSize(100, 100);
 }

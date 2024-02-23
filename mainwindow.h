@@ -23,7 +23,8 @@ private:
     Ui::MainWindow *ui;
     Flag *flag;
     bool isFlagUp;
-
+    QPoint flagUpPosition;
+    QPoint flagDownPosition;
 protected:
     void paintEvent(QPaintEvent*) override;
 private slots:

@@ -4,7 +4,14 @@
 #include <QMainWindow>
 #include <QWidget>
 
-class Flag : public QWidget
+class MovingRectangle : public QWidget
+{
+    Q_OBJECT
+public:
+    MovingRectangle(QWidget *parent = nullptr) : QWidget(parent) {}
+};
+
+class Flag : public MovingRectangle
 {
     Q_OBJECT
 public:
@@ -12,6 +19,7 @@ public:
 protected:
     void paintEvent(QPaintEvent *) override;
 };
+
 
 
 #endif // FLAG_H
