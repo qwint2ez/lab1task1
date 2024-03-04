@@ -7,6 +7,14 @@ Flag::Flag(QWidget *parent) : MovingRectangle(parent)
     setFixedSize(100, 100);
 }
 
+void Flag::raiseFlag() {
+    moveTo(QPoint(x(), 120));
+}
+
+void Flag::lowerFlag() {
+    moveTo(QPoint(x(), 220));
+}
+
 void Flag::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);

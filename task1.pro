@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     flag.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    movingrectangle.cpp
 
 HEADERS += \
     flag.h \
-    mainwindow.h
+    mainwindow.h \
+    movingrectangle.h
 
 FORMS += \
     mainwindow.ui

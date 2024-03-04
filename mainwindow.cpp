@@ -45,15 +45,11 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::on_pushButton_clicked()
 {
-    QPropertyAnimation *animation = new QPropertyAnimation(flag, "pos");
-    animation->setDuration(1000);
-    animation->setStartValue(flag->pos());
     if (!isFlagUp) {
-        animation->setEndValue(flagUpPosition);
+        flag->raiseFlag();
         isFlagUp = true;
     } else {
-        animation->setEndValue(flagDownPosition);
+        flag->lowerFlag();
         isFlagUp = false;
     }
-    animation->start(QAbstractAnimation::DeleteWhenStopped);
 }
