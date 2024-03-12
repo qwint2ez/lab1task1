@@ -9,8 +9,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setMinimumWidth(700);
+    this->setMinimumHeight(500);
+
     flag = new Flag(this);
-    flag->move(445, 220);
+    flag->move(395, 220);
     isFlagUp = false;
 
     flagUpPosition = QPoint(flag->x(), 120);
@@ -29,7 +32,7 @@ void MainWindow::paintEvent(QPaintEvent *)
     painter.setBrush(QBrush(QColorConstants::Svg::turquoise, Qt::SolidPattern));
     painter.drawRect(this->rect());
 
-    QRectF rectangle(250.0, 220.0, 380.0, 200.0);
+    QRectF rectangle(190.0, 220.0, 380.0, 200.0);
     int startAngle = 180 * 16;
     int spanAngle = 180 * 16;
 
@@ -38,7 +41,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
     QPen pen(Qt::black, 10);
     painter.setPen(pen);
-    painter.drawLine(440, 315, 440, 120);
+    painter.drawLine(390, 315, 390, 120);
 
     painter.end();
 }
